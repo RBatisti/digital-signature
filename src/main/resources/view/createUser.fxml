@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateUser">
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="25.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#goToMain" text="Return to menu" />
+               </children>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </HBox>
+            <Label text="Create your user">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Segoe UI" size="40.0" />
+               </font></Label>
+            <HBox layoutX="10.0" layoutY="228.0" prefHeight="17.0" prefWidth="200.0">
+               <children>
+                  <Label text="Name" />
+               </children>
+               <padding>
+                  <Insets left="140.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="55.0" />
+               </VBox.margin>
+            </HBox>
+            <TextField fx:id="name" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" promptText="Enter your name" />
+            <HBox prefHeight="17.0" prefWidth="200.0">
+               <children>
+                  <Label text="CPF" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="140.0" />
+               </padding>
+            </HBox>
+            <TextField fx:id="cpf" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" promptText="Enter your CPF">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></TextField>
+            <HBox prefHeight="17.0" prefWidth="500.0">
+               <children>
+                  <Label text="Password" />
+               </children>
+               <padding>
+                  <Insets left="140.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></HBox>
+            <PasswordField fx:id="password1" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" promptText="Enter your password" />
+            <HBox prefHeight="17.0" prefWidth="200.0">
+               <children>
+                  <Label text="Repeat password" />
+               </children>
+               <padding>
+                  <Insets left="140.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <PasswordField fx:id="password2" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" promptText="Repeat your password" />
+            <Button mnemonicParsing="false" onAction="#create" text="Create">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin></Button>
+            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="500.0">
+               <children>
+                  <Label text="Already have an account?">
+                     <HBox.margin>
+                        <Insets right="8.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Tahoma" size="12.0" />
+                     </font></Label>
+                  <Button mnemonicParsing="false" onAction="#goToLogin" text="Login" />
+               </children>
+               <VBox.margin>
+                  <Insets top="60.0" />
+               </VBox.margin>
+            </HBox>
+         </children></VBox>
+   </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>
