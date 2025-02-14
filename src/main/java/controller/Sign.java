@@ -13,8 +13,10 @@ import utils.Cryptography;
 import utils.DataBase;
 import utils.FileSigner;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.security.PublicKey;
 import java.util.ArrayList;
@@ -38,9 +40,7 @@ public class Sign {
     private void importFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open your document");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF file", "*.pdf"),
-                new FileChooser.ExtensionFilter("DOCX file", "*.docx"),
-                new FileChooser.ExtensionFilter("ODT file", "*.odt"));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF file", "*.pdf"));
 
         selectedFile = fileChooser.showOpenDialog(main.Main.stage);
 
@@ -109,20 +109,14 @@ public class Sign {
         String extension = (lastDotIndex == -1) ? originalName : originalName.substring(lastDotIndex + 1);
         fileChooser.setInitialFileName(baseName + "_signed");
 
-        switch (extension.toLowerCase()) {
-            case "pdf":
-                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF file", "*.pdf"));
-                break;
-            case "docx":
-                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("DOCX file", "*.docx"));
-                break;
-            case "odt":
-                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("ODT file", "*.odt"));
-                break;
-            default:
-                System.out.println(extension);
-                System.out.println("Arquivo não suportado");
-                return;
+        if (extension.equalsIgnoreCase("pdf")) {
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF file", "*.pdf"));
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Document format not supported");
+            alert.setContentText("Only PDF is accept");
+            alert.showAndWait();
+            return;
         }
 
         try {
@@ -137,6 +131,14 @@ public class Sign {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
 
+    @FXML
+    private void goToGithub() {
+        try {
+            Desktop.getDesktop().browse(java.net.URI.create("https://github.com/RBatisti/digital-signature"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -14,7 +14,10 @@ import model.SignatureData;
 import utils.Cryptography;
 import utils.DataBase;
 import utils.FileSigner;
+
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.security.PublicKey;
 import java.util.*;
@@ -83,12 +86,11 @@ public class Validator implements Initializable {
                 if (Cryptography.verifySignature(Cryptography.generateFileHash(FileSigner.getOriginalFile(file)), timeBytes, signatures.get(i), cpfAndKeys.get(cpfs.get(j)))) {
 
                     SignatureData signatureData = new SignatureData(cpfs.get(j), DataBase.getName(cpfs.get(j)), new String(timeBytes));
-                    System.out.println(cpfs.get(j));
                     numberSignatures += 1;
                     labelNumber.setText("Number of signatures: " + numberSignatures);
                     labelNumber.setVisible(true);
-                    System.out.println("Number of signatures: " + numberSignatures);
                     if (numberSignatures == 1) {
+                        signed = true;
                         labelStatus.setText("Status: signed");
                         labelName.setText("Name: " + signatureData.getName());
                         labelCpf.setText("CPF: " + signatureData.getCpf());
@@ -135,5 +137,14 @@ public class Validator implements Initializable {
     private void goToMain() {
         clear();
         changeScreen("main");
+    }
+
+    @FXML
+    private void goToGithub() {
+        try {
+            Desktop.getDesktop().browse(java.net.URI.create("https://github.com/RBatisti/digital-signature"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

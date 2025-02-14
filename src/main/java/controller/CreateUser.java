@@ -6,6 +6,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import utils.UserRepository;
 
+import java.awt.*;
+import java.io.IOException;
+import java.util.Map;
+
 import static main.Main.changeScreen;
 
 public class CreateUser {
@@ -76,4 +80,12 @@ public class CreateUser {
         alert.showAndWait();
     }
 
+    @FXML
+    private void goToGithub() {
+        try {
+            Desktop.getDesktop().browse(java.net.URI.create("https://github.com/RBatisti/digital-signature"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

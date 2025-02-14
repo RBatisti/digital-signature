@@ -7,6 +7,7 @@ module digital_signature{
     requires java.sql;
     requires kernel;
     requires io;
+    requires java.desktop;
 
     opens main;
     opens controller to javafx.fxml;
