@@ -3,6 +3,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Sign">
     <center>
@@ -13,17 +14,52 @@
                   <Button mnemonicParsing="false" onAction="#goToMain" text="Return to menu" />
                </children>
                <VBox.margin>
-                  <Insets bottom="220.0" top="5.0" />
+                  <Insets bottom="130.0" top="5.0" />
                </VBox.margin>
                <padding>
                   <Insets left="5.0" />
                </padding>
             </HBox>
-            <Button fx:id="buttonFile" mnemonicParsing="false" onAction="#buttonClick" text="Button">
+            <Label text="Select the file to sign">
+               <font>
+                  <Font name="Segoe UI" size="40.0" />
+               </font>
                <VBox.margin>
-                  <Insets bottom="20.0" />
+                  <Insets bottom="50.0" />
+               </VBox.margin></Label>
+            <Button fx:id="buttonFile" mnemonicParsing="false" onAction="#importFile" prefHeight="30.0" prefWidth="75.0" text="Select here">
+               <VBox.margin>
+                  <Insets bottom="15.0" />
                </VBox.margin></Button>
-            <TextField fx:id="code" />
+            <Label fx:id="labelStatus" text="Status: no file selected">
+               <font>
+                  <Font name="Tahoma" size="15.0" />
+               </font></Label>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clear" prefHeight="35.0" prefWidth="81.0" text="Clear">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#sign" prefHeight="35.0" prefWidth="81.0" text="To sign">
+                     <HBox.margin>
+                        <Insets left="50.0" right="50.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#exportFile" prefHeight="35.0" prefWidth="81.0" text="Export file">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="100.0" />
+               </VBox.margin>
+            </HBox>
          </children></VBox>
     </center>
     <top>

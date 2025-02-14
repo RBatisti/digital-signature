@@ -10,6 +10,7 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.security.*;
@@ -101,7 +102,7 @@ public class Cryptography {
     }
 
 
-    public static String generateHashFile(File file) {
+    public static String generateFileHash(File file) {
         try (FileInputStream fis = new FileInputStream(file)) {
             SHA256.Digest digest = new SHA256.Digest();
             byte[] buffer = new byte[1024];
@@ -113,6 +114,44 @@ public class Cryptography {
             fis.close();
 
             return Hex.toHexString(digest.digest());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String generateOriginHash(File file) {
+        try (FileInputStream fis = new FileInputStream(file)) {
+            SHA256.Digest digest = new SHA256.Digest();
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                digest.update(buffer, 0, bytesRead);
+            }
+            fis.close();
+
+            return Hex.toHexString(digest.digest());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String generateFileHash(byte[] content) {
+        try {
+            SHA256.Digest digest = new SHA256.Digest();
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(content);
+            byte[] buffer = new byte[1024];
+
+            int bytesRead;
+            while ((bytesRead = byteArrayInputStream.read(buffer)) != -1) {
+                digest.update(buffer, 0, bytesRead);
+            }
+            byteArrayInputStream.close();
+
+            return Hex.toHexString(digest.digest());
+
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -140,11 +179,13 @@ public class Cryptography {
         }
     }
 
-    public static boolean verifySignature(String hash, String signatureBase64, PublicKey publicKey) {
+
+    public static boolean verifySignature(String hash, byte[] timeBytes, String signatureBase64, PublicKey publicKey) {
         try {
             Signature signature = Signature.getInstance("SHA256withRSA");
             signature.initVerify(publicKey);
             signature.update(hash.getBytes());
+            signature.update(timeBytes);
 
             byte[] signatureBytes = Base64.getDecoder().decode(signatureBase64);
             return signature.verify(signatureBytes);

@@ -5,6 +5,8 @@ module digital_signature{
     requires org.apache.poi.ooxml;
     requires org.bouncycastle.provider;
     requires java.sql;
+    requires kernel;
+    requires io;
 
     opens main;
     opens controller to javafx.fxml;

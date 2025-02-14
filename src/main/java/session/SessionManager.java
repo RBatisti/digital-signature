@@ -24,4 +24,9 @@ public class SessionManager {
     public User getUser() {
         return user;
     }
+
+    public void loggout() {
+        instance = null;
+        user = null;
+    }
 }

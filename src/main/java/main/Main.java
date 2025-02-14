@@ -50,7 +50,7 @@ public class Main extends Application {
     }
 
     private Scene loadScene(String path) throws Exception {
-        Parent fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path)));
+        Parent fxml = FXMLLoader.load(getClass().getResource(path));
         return new Scene(fxml, 500, 600);
     }
 

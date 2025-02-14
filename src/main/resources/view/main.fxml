@@ -11,38 +11,44 @@
          <children>
             <Label text="Digital Signature">
                <font>
-                  <Font name="Segoe UI" size="40.0" />
+                  <Font name="Segoe UI" size="45.0" />
                </font>
                <VBox.margin>
-                  <Insets top="100.0" />
+                  <Insets top="110.0" />
                </VBox.margin></Label>
             <Label text="Choose the Service">
                <font>
-                  <Font name="Tahoma" size="20.0" />
+                  <Font name="Tahoma" size="25.0" />
                </font>
                <VBox.margin>
-                  <Insets top="80.0" />
+                  <Insets top="105.0" />
                </VBox.margin></Label>
             <HBox alignment="CENTER" prefHeight="37.0" prefWidth="500.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#goToValidator" text="Validator">
+                  <Button mnemonicParsing="false" onAction="#goToValidator" prefHeight="35.0" prefWidth="75.0" text="Validator">
                      <BorderPane.margin>
                         <Insets right="10.0" />
                      </BorderPane.margin>
                      <HBox.margin>
-                        <Insets right="7.0" />
+                        <Insets right="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#goToLogin" text="Sign">
+                  <Button mnemonicParsing="false" onAction="#goToLogin" prefHeight="35.0" prefWidth="75.0" text="Sign">
                      <HBox.margin>
-                        <Insets left="7.0" />
-                     </HBox.margin></Button>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
                </children>
                <BorderPane.margin>
                   <Insets />
                </BorderPane.margin>
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets top="20.0" />
                </VBox.margin>
             </HBox>
          </children></VBox>
