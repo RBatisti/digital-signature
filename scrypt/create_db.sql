@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS digital-signature;
+CREATE DATABASE IF NOT EXISTS `digital-signature`;
 
-USE digital-signature;
+USE `digital-signature`;
 
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
