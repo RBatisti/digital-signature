@@ -6,4 +6,6 @@ public class Config {
     public static final int PARALLELIZATION_USER = 1;
     public static final int PARALLELIZATION_KEY = 2;
     public static final int KEY_LENGTH = 32;
+    public static final byte[] SIGNATURE_MARK = "###SIGNATURE###".getBytes();
+    public static final byte[] TIME_MARK = "###DATE###".getBytes();
 }

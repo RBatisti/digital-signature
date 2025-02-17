@@ -3,18 +3,10 @@ package controller;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import model.SignatureData;
-import utils.Cryptography;
-import utils.DataBase;
-import utils.FileSigner;
-
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +14,12 @@ import java.net.URL;
 import java.security.PublicKey;
 import java.util.*;
 
+import static dao.UserDAO.getName;
+import static dao.UserDAO.getPublicKeys;
 import static main.Main.changeScreen;
+import static service.SignatureService.generateFileHash;
+import static service.SignatureService.verifySignature;
+import static utils.FileUtils.*;
 
 public class Validator implements Initializable {
     private static File file;
@@ -43,20 +40,7 @@ public class Validator implements Initializable {
     private Label labelDate;
 
     @FXML
-    private VBox vBoxStatus;
-
-    @FXML
-    private TextField signature;
-
-    @FXML
     private ListView<String> listView;
-
-    @FXML
-    private Button buttonClear;
-
-    @FXML
-    private HBox hBox;
-
 
     ArrayList<SignatureData> listViewData = new ArrayList<>();
 
@@ -67,25 +51,25 @@ public class Validator implements Initializable {
 
     @FXML
     public void importFile() {
-        Boolean signed = false;
+        boolean signed = false;
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open your document");
 
         file = fileChooser.showOpenDialog(main.Main.stage);
 
-        ArrayList<String> signatures = FileSigner.getSignatures(file);
+        ArrayList<String> signatures = getSignatures(file);
 
-        Map<String, PublicKey> cpfAndKeys = DataBase.getPublicKeys();
+        Map<String, PublicKey> cpfAndKeys = getPublicKeys();
         ArrayList<String> cpfs = new ArrayList<>(cpfAndKeys.keySet());
 
         int numberSignatures = 0;
 
         for (int i = 0; i < signatures.size(); i++) {
-            byte[] timeBytes = FileSigner.getTime(file, i);
+            byte[] timeBytes = getTime(file, i);
             for (int j = 0; j < cpfAndKeys.size(); j++) {
-                if (Cryptography.verifySignature(Cryptography.generateFileHash(FileSigner.getOriginalFile(file)), timeBytes, signatures.get(i), cpfAndKeys.get(cpfs.get(j)))) {
+                if (verifySignature(generateFileHash(getOriginalFile(file)), timeBytes, signatures.get(i), cpfAndKeys.get(cpfs.get(j)))) {
 
-                    SignatureData signatureData = new SignatureData(cpfs.get(j), DataBase.getName(cpfs.get(j)), new String(timeBytes));
+                    SignatureData signatureData = new SignatureData(cpfs.get(j), getName(cpfs.get(j)), new String(timeBytes));
                     numberSignatures += 1;
                     labelNumber.setText("Number of signatures: " + numberSignatures);
                     labelNumber.setVisible(true);

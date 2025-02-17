@@ -1,39 +1,37 @@
-package utils;
+package service;
 
-import config.Config;
 import dao.DB;
 import model.User;
-import org.bouncycastle.jcajce.provider.symmetric.ARC4;
 
 import java.security.KeyPair;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Base64;
+import java.util.Objects;
 
-public class UserRepository {
+import static dao.UserDAO.*;
+import static security.CryptoUtils.*;
+
+public class AuthService {
     public static void createUser(String cpf, String password, String name) {
-        byte[] salt = Cryptography.generateSalt();
-        String passwordHash = Cryptography.generateHashPassword(password, salt);
+        byte[] salt = generateSalt();
+        String passwordHash = generateHashPassword(password, salt);
         String saltStr = Base64.getEncoder().encodeToString(salt);
-        KeyPair keyPair = Cryptography.keyPairGenerator();
+        KeyPair keyPair = keyPairGenerator();
         String publicKey = Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded());
         String privateKey = Base64.getEncoder().encodeToString(keyPair.getPrivate().getEncoded());
 
-        byte[] keyDecrypt = Cryptography.generateKeyDecrypt(password, salt);
+        byte[] keyDecrypt = generateKeyDecrypt(password, salt);
 
-        String privateKeyEncrypted = Cryptography.encrypt(keyDecrypt, privateKey);
+        String privateKeyEncrypted = encrypt(keyDecrypt, privateKey);
 
-        DataBase.saveUser(saltStr, passwordHash, publicKey, privateKeyEncrypted, cpf, name);
-
-        System.out.println(cpf);
-        System.out.println(password);
-        System.out.println(name);
+        saveUser(saltStr, passwordHash, publicKey, privateKeyEncrypted, cpf, name);
     }
 
     public static boolean checkLogin(String cpf, String password) {
-        if (DataBase.existCpf(cpf)) {
-            return DataBase.getPassword(cpf).equals(Cryptography.generateHashPassword(password, DataBase.getSalt(cpf)));
+        if (existCpf(cpf)) {
+            return Objects.equals(getPassword(cpf), generateHashPassword(password, getSalt(cpf)));
         }
         return false;
     }
@@ -42,7 +40,7 @@ public class UserRepository {
         try {
             Connection connection = DB.getConnection();
 
-            String query = "SELECT salt, publicKey, privateKey, name FROM `digital-signature`.users where cpf = ?";
+            String query = "SELECT salt, publicKey, privateKey FROM `digital-signature`.users where cpf = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, cpf);
             ResultSet resultSet = statement.executeQuery();
@@ -52,23 +50,19 @@ public class UserRepository {
             }
 
             if (resultSet.next()) {
-                String name = resultSet.getString("name");
                 String salt = resultSet.getString("salt");
                 byte[] saltBytes = Base64.getDecoder().decode(salt);
-                byte[] keyDecrypt = Cryptography.generateKeyDecrypt(password, saltBytes);
+                byte[] keyDecrypt = generateKeyDecrypt(password, saltBytes);
 
                 String publicKey = resultSet.getString("publicKey");
                 String privateKey = resultSet.getString("privateKey");
 
-                privateKey = Cryptography.decrypt(keyDecrypt, privateKey);
+                privateKey = decrypt(keyDecrypt, privateKey);
 
-                KeyPair keyPair = Cryptography.loadKeyPair(publicKey, privateKey);
+                KeyPair keyPair = loadKeyPair(publicKey, privateKey);
 
-                System.out.println("RETORNOU CERTINHO");
-
-                return new User(cpf, name, keyPair);
+                return new User(keyPair);
             }
-            // Talvez quando foi convertida a key para string houve algum problema
 
         } catch (Exception e) {
             throw new RuntimeException(e);

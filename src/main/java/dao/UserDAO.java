@@ -1,6 +1,4 @@
-package utils;
-
-import dao.DB;
+package dao;
 
 import java.security.KeyFactory;
 import java.security.PublicKey;
@@ -9,20 +7,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DataBase {
+public class UserDAO {
     public static void saveUser(String salt, String hashPassword, String publicKey, String privateKey, String cpf, String name) {
         try {
             Connection connection = DB.getConnection();
             PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO `digital-signature`.users"
                             + "(cpf, salt, password, publicKey, privateKey, name)"
-            + "VALUES"
-            + "(?, ?, ?, ?, ?, ?)");
+                            + "VALUES"
+                            + "(?, ?, ?, ?, ?, ?)");
 
             statement.setString(1, cpf);
             statement.setString(2, salt);

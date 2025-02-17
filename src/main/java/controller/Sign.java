@@ -4,26 +4,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
-import main.Main;
-import model.User;
 import session.SessionManager;
-import utils.Cryptography;
-import utils.DataBase;
-import utils.FileSigner;
-
 import java.awt.*;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.security.PublicKey;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Map;
 
 import static main.Main.changeScreen;
+import static service.SignatureService.*;
+import static utils.FileUtils.*;
 
 public class Sign {
     @FXML
@@ -45,12 +37,12 @@ public class Sign {
         selectedFile = fileChooser.showOpenDialog(main.Main.stage);
 
         if (selectedFile != null) {
-            ArrayList<String> signatures = FileSigner.getSignatures(selectedFile);
+            ArrayList<String> signatures = getSignatures(selectedFile);
             PublicKey publicKey = SessionManager.getInstance().getUser().getPublicKey();
 
             for (int i = 0; i < signatures.size(); i++) {
-                byte[] timeBytes = FileSigner.getTime(selectedFile, i);
-                if (Cryptography.verifySignature(Cryptography.generateFileHash(FileSigner.getOriginalFile(selectedFile)), timeBytes, signatures.get(i), publicKey)) {
+                byte[] timeBytes = getTime(selectedFile, i);
+                if (verifySignature(generateFileHash(getOriginalFile(selectedFile)), timeBytes, signatures.get(i), publicKey)) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setHeaderText("You can sign only once");
                     alert.setContentText("You have already sign this document");
@@ -79,7 +71,7 @@ public class Sign {
             alert.showAndWait();
             return;
         }
-        signature = FileSigner.signFile(selectedFile, SessionManager.getInstance().getUser().getPrivateKey());
+        signature = signFile(selectedFile, SessionManager.getInstance().getUser().getPrivateKey());
         labelStatus.setText("Status: document signed");
     }
 

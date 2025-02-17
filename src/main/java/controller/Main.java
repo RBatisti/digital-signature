@@ -1,9 +1,6 @@
 package controller;
 
 import javafx.fxml.FXML;
-import utils.DataBase;
-import utils.UserRepository;
-
 import java.awt.*;
 import java.io.IOException;
 

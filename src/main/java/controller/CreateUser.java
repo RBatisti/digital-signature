@@ -1,29 +1,26 @@
 package controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import utils.UserRepository;
-
 import java.awt.*;
 import java.io.IOException;
-import java.util.Map;
 
 import static main.Main.changeScreen;
+import static service.AuthService.createUser;
 
 public class CreateUser {
     @FXML
-    private TextField name;
+    private TextField fieldName;
 
     @FXML
-    private TextField cpf;
+    private TextField fieldCpf;
 
     @FXML
-    private PasswordField password1;
+    private PasswordField fieldPassword1;
 
     @FXML
-    private PasswordField password2;
+    private PasswordField fieldPassword2;
 
 
     @FXML
@@ -38,19 +35,19 @@ public class CreateUser {
 
     @FXML
     public void create() {
-        if (!password1.getText().equals(password2.getText())) {
+        if (!fieldPassword1.getText().equals(fieldPassword2.getText())) {
             showError("Error", "Passwors are different", "");
             return;
         }
-        if (cpf.getText().length() != 11) {
+        if (fieldCpf.getText().length() != 11) {
             showError("Error", "CPF must contain 11 digits", "");
             return;
         }
-        if (!isInteger(cpf.getText())) {
+        if (!isInteger(fieldCpf.getText())) {
             showError("Error", "CPF must contain just numbers", "");
             return;
         }
-        UserRepository.createUser(cpf.getText(), password1.getText(), name.getText());
+        createUser(fieldCpf.getText(), fieldPassword1.getText(), fieldName.getText());
         goToMain();
     }
 

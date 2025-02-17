@@ -3,14 +3,13 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import model.User;
 import session.SessionManager;
-import utils.UserRepository;
-
 import java.awt.*;
 import java.io.IOException;
 
 import static main.Main.changeScreen;
+import static service.AuthService.checkLogin;
+import static service.AuthService.loadUser;
 
 public class Login {
     @FXML
@@ -21,8 +20,8 @@ public class Login {
 
     @FXML
     private void login() {
-        if (UserRepository.checkLogin(cpf.getText(), password.getText())) {
-            SessionManager.getInstance().setUser(UserRepository.loadUser(cpf.getText(), password.getText()));
+        if (checkLogin(cpf.getText(), password.getText())) {
+            SessionManager.getInstance().setUser(loadUser(cpf.getText(), password.getText()));
             cpf.setText("");
             password.setText("");
             changeScreen("sign");

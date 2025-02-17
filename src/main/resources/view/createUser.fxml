@@ -38,7 +38,7 @@
                   <Insets top="55.0" />
                </VBox.margin>
             </HBox>
-            <TextField fx:id="name" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" promptText="Enter your name" />
+            <TextField fx:id="fieldName" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" promptText="Enter your name" />
             <HBox prefHeight="17.0" prefWidth="200.0">
                <children>
                   <Label text="CPF" />
@@ -50,7 +50,7 @@
                   <Insets left="140.0" />
                </padding>
             </HBox>
-            <TextField fx:id="cpf" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" promptText="Enter your CPF">
+            <TextField fx:id="fieldCpf" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" promptText="Enter your CPF">
                <VBox.margin>
                   <Insets />
                </VBox.margin></TextField>
@@ -64,7 +64,7 @@
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin></HBox>
-            <PasswordField fx:id="password1" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" promptText="Enter your password" />
+            <PasswordField fx:id="fieldPassword1" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" promptText="Enter your password" />
             <HBox prefHeight="17.0" prefWidth="200.0">
                <children>
                   <Label text="Repeat password" />
@@ -76,7 +76,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
-            <PasswordField fx:id="password2" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" promptText="Repeat your password" />
+            <PasswordField fx:id="fieldPassword2" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" promptText="Repeat your password" />
             <Button mnemonicParsing="false" onAction="#create" text="Create">
                <VBox.margin>
                   <Insets top="15.0" />

@@ -2,8 +2,6 @@ package session;
 
 import model.User;
 
-import java.security.PrivateKey;
-
 public class SessionManager {
     private static SessionManager instance;
     private User user;
@@ -26,7 +24,7 @@ public class SessionManager {
     }
 
     public void loggout() {
-        instance = null;
         user = null;
+        instance = null;
     }
 }
