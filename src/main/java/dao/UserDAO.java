@@ -29,7 +29,7 @@ public class UserDAO {
             statement.setString(6, name);
 
             statement.executeUpdate();
-        } catch (Exception e) {
+        } catch (RuntimeException | SQLException e) {
             throw new RuntimeException(e);
         }
     }
@@ -46,7 +46,7 @@ public class UserDAO {
             if (resultSet.next()) {
                 return resultSet.getString("name");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return null;
@@ -109,7 +109,7 @@ public class UserDAO {
             }
             return false;
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

@@ -1,5 +1,6 @@
 package controller;
 
+import dao.DB;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -25,16 +26,21 @@ public class CreateUser {
 
     @FXML
     private void goToMain() {
+        clear();
         changeScreen("main");
     }
 
     @FXML
     private void goToLogin() {
+        clear();
         changeScreen("login");
     }
 
     @FXML
     public void create() {
+        if (DB.withoutConnection()) {
+            return;
+        }
         if (!fieldPassword1.getText().equals(fieldPassword2.getText())) {
             showError("Error", "Passwors are different", "");
             return;
@@ -84,5 +90,12 @@ public class CreateUser {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void clear() {
+        fieldName.setText("");
+        fieldCpf.setText("");
+        fieldPassword1.setText("");
+        fieldPassword2.setText("");
     }
 }

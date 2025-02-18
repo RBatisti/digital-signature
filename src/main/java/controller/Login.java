@@ -1,5 +1,6 @@
 package controller;
 
+import dao.DB;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -20,21 +21,32 @@ public class Login {
 
     @FXML
     private void login() {
+        if (DB.withoutConnection()) {
+            return;
+        }
         if (checkLogin(cpf.getText(), password.getText())) {
             SessionManager.getInstance().setUser(loadUser(cpf.getText(), password.getText()));
-            cpf.setText("");
-            password.setText("");
+            clear();
             changeScreen("sign");
+        } else {
+            goToMain();
         }
+    }
+
+    private void clear() {
+        cpf.setText("");
+        password.setText("");
     }
 
     @FXML
     private void goToMain() {
+        clear();
         changeScreen("main");
     }
 
     @FXML
     private void goToCreate() {
+        clear();
         changeScreen("createUser");
     }
 

@@ -5,8 +5,6 @@ module digital_signature{
     requires org.apache.poi.ooxml;
     requires org.bouncycastle.provider;
     requires java.sql;
-    requires kernel;
-    requires io;
     requires java.desktop;
 
     opens main;

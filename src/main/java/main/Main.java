@@ -4,7 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.util.Objects;
 
 public class Main extends Application {
     public static Stage stage;
@@ -27,6 +30,9 @@ public class Main extends Application {
         sign = loadScene("/view/sign.fxml");
 
         primaryStage.setTitle("Digital Signature");
+
+        Image image = new Image(Objects.requireNonNull(getClass().getResource("/images/icon.png")).toExternalForm());
+        primaryStage.getIcons().add(image);
 
         changeScreen("main");
 

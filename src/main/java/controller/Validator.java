@@ -1,5 +1,6 @@
 package controller;
 
+import dao.DB;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -51,6 +52,10 @@ public class Validator implements Initializable {
 
     @FXML
     public void importFile() {
+        if(DB.withoutConnection()) {
+            return;
+        }
+
         boolean signed = false;
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open your document");

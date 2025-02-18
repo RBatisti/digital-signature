@@ -11,6 +11,20 @@ public class DB {
 
     private static Connection connection;
 
+    public static boolean withoutConnection() {
+        try {
+            Connection _ = getConnection();
+            return false;
+        } catch (RuntimeException e) {
+            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Database unavailable");
+            alert.setContentText("Unable to connect to database");
+            alert.showAndWait();
+        }
+        return true;
+    }
+
     public static Connection getConnection() {
         if (connection == null) {
             try {
