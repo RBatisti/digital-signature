@@ -2,7 +2,6 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import session.SessionManager;
@@ -18,9 +17,6 @@ import static service.SignatureService.*;
 import static utils.FileUtils.*;
 
 public class Sign {
-    @FXML
-    private Button buttonFile;
-
     @FXML
     private Label labelStatus;
 

@@ -102,8 +102,6 @@ public class CryptoUtils {
     }
 
     public static IvParameterSpec generateIV() {
-        byte[] iv = new byte[16];
-        new SecureRandom().nextBytes(iv);
-        return new IvParameterSpec(iv);
+        return new IvParameterSpec(generateSalt());
     }
 }

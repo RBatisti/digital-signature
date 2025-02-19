@@ -1,5 +1,6 @@
 package main;
 
+import dao.DB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -43,6 +44,8 @@ public class Main extends Application {
         primaryStage.setMaxHeight(600);
 
         primaryStage.show();
+
+        Runtime.getRuntime().addShutdownHook(new Thread(DB::closeConnection));
     }
 
     public static void main(String[] args) {
@@ -50,7 +53,7 @@ public class Main extends Application {
     }
 
     private Scene loadScene(String path) throws Exception {
-        Parent fxml = FXMLLoader.load(getClass().getResource(path));
+        Parent fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path)));
         return new Scene(fxml, 500, 600);
     }
 
