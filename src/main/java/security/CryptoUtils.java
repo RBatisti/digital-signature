@@ -14,6 +14,7 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 public class CryptoUtils {
+    // Encrypt with AES
     public static String encrypt(byte[] key, String text) {
         try {
             SecretKey secretKey = new SecretKeySpec(key, "AES");
@@ -34,6 +35,7 @@ public class CryptoUtils {
         }
     }
 
+    // Decrypt AES
     public static String decrypt(byte[] key, String encryptedText) {
         try {
             byte[] encriptedWithIV = Base64.getDecoder().decode(encryptedText);
@@ -57,10 +59,12 @@ public class CryptoUtils {
         }
     }
 
+    // Hash SCrypt
     public static byte[] generateKeyDecrypt(String password, byte[] salt) {
         return SCrypt.generate(password.getBytes(), salt, Config.COST_FACTOR, Config.BLOCK_SIZE, Config.PARALLELIZATION_KEY, Config.KEY_LENGTH);
     }
 
+    // Hash SCrypt
     public static String generateHashPassword(String password, byte[] salt) {
         return Base64.getEncoder().encodeToString(SCrypt.generate(password.getBytes(), salt, Config.COST_FACTOR, Config.BLOCK_SIZE, Config.PARALLELIZATION_USER, Config.KEY_LENGTH));
     }

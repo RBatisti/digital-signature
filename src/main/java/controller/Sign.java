@@ -32,6 +32,7 @@ public class Sign {
 
         selectedFile = fileChooser.showOpenDialog(main.Main.stage);
 
+        // Load all signatures
         if (selectedFile != null) {
             ArrayList<String> signatures = getSignatures(selectedFile);
             PublicKey publicKey = SessionManager.getInstance().getUser().getPublicKey();
@@ -55,7 +56,7 @@ public class Sign {
     private void goToMain() {
         clear();
         changeScreen("main");
-        SessionManager.getInstance().loggout();
+        SessionManager.getInstance().logout();
     }
 
     @FXML
@@ -91,6 +92,7 @@ public class Sign {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save your document");
 
+        // Defines the file name
         String originalName = selectedFile.getName();
         int lastDotIndex = originalName.lastIndexOf(".");
         String baseName = (lastDotIndex == -1) ? originalName : originalName.substring(0, lastDotIndex);
@@ -107,11 +109,11 @@ public class Sign {
             return;
         }
 
+        // Save the file
         try {
             File file = fileChooser.showSaveDialog(main.Main.stage);
             if (file != null) {
                 byte[] fileContent = Files.readAllBytes(selectedFile.toPath());
-
                 Files.write(file.toPath(), fileContent);
                 Files.write(file.toPath(), signature);
             }

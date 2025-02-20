@@ -42,7 +42,7 @@
                   <Insets left="140.0" />
                </padding>
             </HBox>
-            <TextField fx:id="cpf" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" promptText="Enter your CPF" />
+            <TextField fx:id="fieldCpf" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" promptText="Enter your CPF" />
             <HBox maxHeight="17.0" minHeight="17.0" prefHeight="17.0" prefWidth="500.0">
                <children>
                   <Label text="Password">
@@ -57,7 +57,7 @@
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin></HBox>
-            <PasswordField fx:id="password" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" promptText="Enter your password" />
+            <PasswordField fx:id="fieldPassword" maxWidth="220.0" minWidth="220.0" prefWidth="220.0" promptText="Enter your password" />
             <Button mnemonicParsing="false" onAction="#login" text="Login">
                <VBox.margin>
                   <Insets top="20.0" />

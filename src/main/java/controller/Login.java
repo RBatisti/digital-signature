@@ -14,18 +14,18 @@ import static service.AuthService.loadUser;
 
 public class Login {
     @FXML
-    private TextField cpf;
+    private TextField fieldCpf;
 
     @FXML
-    private PasswordField password;
+    private PasswordField fieldPassword;
 
     @FXML
     private void login() {
         if (DB.withoutConnection()) {
             return;
         }
-        if (checkLogin(cpf.getText(), password.getText())) {
-            SessionManager.getInstance().setUser(loadUser(cpf.getText(), password.getText()));
+        if (checkLogin(fieldCpf.getText(), fieldPassword.getText())) {
+            SessionManager.getInstance().setUser(loadUser(fieldCpf.getText(), fieldPassword.getText()));
             clear();
             changeScreen("sign");
         } else {
@@ -34,8 +34,8 @@ public class Login {
     }
 
     private void clear() {
-        cpf.setText("");
-        password.setText("");
+        fieldCpf.setText("");
+        fieldPassword.setText("");
     }
 
     @FXML

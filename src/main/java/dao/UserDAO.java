@@ -53,6 +53,7 @@ public class UserDAO {
     }
 
 
+    // Return a Map<CPF, PublicKey>
     public static Map<String, PublicKey> getPublicKeys() {
         Map<String, PublicKey> publicKeys = new HashMap<>();
         String query = "SELECT cpf, publicKey FROM `digital-signature`.users";

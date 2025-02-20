@@ -11,6 +11,7 @@ public class DB {
 
     private static Connection connection;
 
+    // Verify connection status
     public static boolean withoutConnection() {
         try {
             Connection _ = getConnection();
@@ -38,6 +39,7 @@ public class DB {
         return connection;
     }
 
+    // Load information from config/db.properties
     private static Properties loadProperties() {
         try (FileInputStream fs = new FileInputStream("src/main/java/config/db.properties")){
             Properties properties = new Properties();

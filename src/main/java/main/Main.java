@@ -23,7 +23,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         stage = primaryStage;
 
-        // Carregando as telas
+        // Load screens
         mainScene = loadScene("/view/main.fxml");
         login = loadScene("/view/login.fxml");
         createUserScene = loadScene("/view/createUser.fxml");
@@ -37,7 +37,7 @@ public class Main extends Application {
 
         changeScreen("main");
 
-        // Fixando o tamanho da tela
+        // Fix the screen size
         primaryStage.setMinWidth(500);
         primaryStage.setMinHeight(600);
         primaryStage.setMaxWidth(500);
@@ -45,6 +45,7 @@ public class Main extends Application {
 
         primaryStage.show();
 
+        // Close connection at the end of execution
         Runtime.getRuntime().addShutdownHook(new Thread(DB::closeConnection));
     }
 

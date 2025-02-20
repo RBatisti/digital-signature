@@ -60,6 +60,7 @@ public class SignatureService {
         }
     }
 
+    // Hash file with SHA-256
     public static String generateFileHash(File file) {
         try (FileInputStream fis = new FileInputStream(file)) {
             SHA256.Digest digest = new SHA256.Digest();

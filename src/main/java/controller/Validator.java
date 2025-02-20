@@ -69,6 +69,7 @@ public class Validator implements Initializable {
 
         int numberSignatures = 0;
 
+        // Verify the signatures
         for (int i = 0; i < signatures.size(); i++) {
             byte[] timeBytes = getTime(file, i);
             for (int j = 0; j < cpfAndKeys.size(); j++) {

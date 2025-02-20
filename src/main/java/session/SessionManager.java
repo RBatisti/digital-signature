@@ -23,7 +23,7 @@ public class SessionManager {
         return user;
     }
 
-    public void loggout() {
+    public void logout() {
         user = null;
         instance = null;
     }
