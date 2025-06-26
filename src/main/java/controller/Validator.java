@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.security.PublicKey;
 import java.util.*;
+import java.util.List;
 
 import static dao.UserDAO.getName;
 import static dao.UserDAO.getPublicKeys;
@@ -62,7 +63,7 @@ public class Validator implements Initializable {
 
         file = fileChooser.showOpenDialog(main.Main.stage);
 
-        ArrayList<String> signatures = getSignatures(file);
+        List<String> signatures = getSignatures(file);
 
         Map<String, PublicKey> cpfAndKeys = getPublicKeys();
         ArrayList<String> cpfs = new ArrayList<>(cpfAndKeys.keySet());
@@ -74,11 +75,11 @@ public class Validator implements Initializable {
             byte[] timeBytes = getTime(file, i);
             for (int j = 0; j < cpfAndKeys.size(); j++) {
                 if (verifySignature(generateFileHash(getOriginalFile(file)), timeBytes, signatures.get(i), cpfAndKeys.get(cpfs.get(j)))) {
-
                     SignatureData signatureData = new SignatureData(cpfs.get(j), getName(cpfs.get(j)), new String(timeBytes));
                     numberSignatures += 1;
                     labelNumber.setText("Number of signatures: " + numberSignatures);
                     labelNumber.setVisible(true);
+
                     if (numberSignatures == 1) {
                         signed = true;
                         labelStatus.setText("Status: signed");

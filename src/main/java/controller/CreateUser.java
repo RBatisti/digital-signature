@@ -2,6 +2,7 @@ package controller;
 
 import dao.DB;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.io.IOException;
 
 import static main.Main.changeScreen;
 import static service.AuthService.createUser;
+import static utils.Alerts.showMessage;
 
 public class CreateUser {
     @FXML
@@ -42,15 +44,15 @@ public class CreateUser {
             return;
         }
         if (!fieldPassword1.getText().equals(fieldPassword2.getText())) {
-            showError("Error", "Passwors are different", "");
+            showMessage("Error", "Passwords are different", "check the password and try again", Alert.AlertType.ERROR);
             return;
         }
         if (fieldCpf.getText().length() != 11) {
-            showError("Error", "CPF must contain 11 digits", "");
+            showMessage("Error", "CPF must contain 11 digits", "check the CPF and try again", Alert.AlertType.ERROR);
             return;
         }
         if (!isInteger(fieldCpf.getText())) {
-            showError("Error", "CPF must contain just numbers", "");
+            showMessage("Error", "CPF must contain just numbers", "check the CPF and try again", Alert.AlertType.ERROR);
             return;
         }
         createUser(fieldCpf.getText(), fieldPassword1.getText(), fieldName.getText());
@@ -73,14 +75,6 @@ public class CreateUser {
             }
         }
         return true;
-    }
-
-    public static void showError(String title, String header, String message) {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     @FXML

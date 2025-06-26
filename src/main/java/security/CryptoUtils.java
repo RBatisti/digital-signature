@@ -64,7 +64,6 @@ public class CryptoUtils {
         return SCrypt.generate(password.getBytes(), salt, Config.COST_FACTOR, Config.BLOCK_SIZE, Config.PARALLELIZATION_KEY, Config.KEY_LENGTH);
     }
 
-    // Hash SCrypt
     public static String generateHashPassword(String password, byte[] salt) {
         return Base64.getEncoder().encodeToString(SCrypt.generate(password.getBytes(), salt, Config.COST_FACTOR, Config.BLOCK_SIZE, Config.PARALLELIZATION_USER, Config.KEY_LENGTH));
     }

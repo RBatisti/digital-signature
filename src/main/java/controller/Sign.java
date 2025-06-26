@@ -27,7 +27,7 @@ public class Sign {
     @FXML
     private void importFile() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open your document");
+        fileChooser.setTitle("Open your file");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF file", "*.pdf"));
 
         selectedFile = fileChooser.showOpenDialog(main.Main.stage);
@@ -42,7 +42,7 @@ public class Sign {
                 if (verifySignature(generateFileHash(getOriginalFile(selectedFile)), timeBytes, signatures.get(i), publicKey)) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setHeaderText("You can sign only once");
-                    alert.setContentText("You have already sign this document");
+                    alert.setContentText("You have already sign this file");
                     alert.showAndWait();
                     selectedFile = null;
                     return;
@@ -64,12 +64,12 @@ public class Sign {
         if (selectedFile == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("You need import first");
-            alert.setContentText("You did not import the document");
+            alert.setContentText("You did not import the file");
             alert.showAndWait();
             return;
         }
         signature = signFile(selectedFile, SessionManager.getInstance().getUser().getPrivateKey());
-        labelStatus.setText("Status: document signed");
+        labelStatus.setText("Status: file signed");
     }
 
     @FXML
@@ -85,12 +85,12 @@ public class Sign {
         if (signature == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("You need to sign first");
-            alert.setContentText("You did not sign the document");
+            alert.setContentText("You did not sign the file");
             alert.showAndWait();
             return;
         }
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save your document");
+        fileChooser.setTitle("Save your file");
 
         // Defines the file name
         String originalName = selectedFile.getName();
@@ -103,7 +103,7 @@ public class Sign {
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF file", "*.pdf"));
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Document format not supported");
+            alert.setHeaderText("File format not supported");
             alert.setContentText("Only PDF is accept");
             alert.showAndWait();
             return;
