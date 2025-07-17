@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import java.awt.*;
 import java.io.IOException;
 
+import static dao.UserDAO.existCpf;
 import static main.Main.changeScreen;
 import static service.AuthService.createUser;
 import static utils.Alerts.showMessage;
@@ -55,7 +56,12 @@ public class CreateUser {
             showMessage("Error", "CPF must contain just numbers", "check the CPF and try again", Alert.AlertType.ERROR);
             return;
         }
+        if (existCpf(fieldCpf.getText())) {
+            showMessage("Error", "cpf has already been used", "check the CPF and try again", Alert.AlertType.ERROR);
+            return;
+        }
         createUser(fieldCpf.getText(), fieldPassword1.getText(), fieldName.getText());
+        clear();
         goToMain();
     }
 
