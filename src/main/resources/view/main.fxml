@@ -5,63 +5,47 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Main">
+<BorderPane style="-fx-background-color: #221d21;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Main">
    <center>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Digital Signature">
+            <Label text="Digital Signature" textFill="#f77014">
                <font>
                   <Font name="Segoe UI" size="45.0" />
                </font>
                <VBox.margin>
                   <Insets top="110.0" />
-               </VBox.margin></Label>
-            <Label text="Choose the Service">
+               </VBox.margin>
+            </Label>
+            <Label text="Choose the Service" textFill="#b7aea5">
                <font>
                   <Font name="Tahoma" size="25.0" />
                </font>
                <VBox.margin>
-                  <Insets top="105.0" />
-               </VBox.margin></Label>
-            <HBox alignment="CENTER" prefHeight="37.0" prefWidth="500.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#goToValidator" prefHeight="35.0" prefWidth="75.0" text="Validator">
-                     <BorderPane.margin>
-                        <Insets right="10.0" />
-                     </BorderPane.margin>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#goToLogin" prefHeight="35.0" prefWidth="75.0" text="Sign">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font></Button>
-               </children>
-               <BorderPane.margin>
-                  <Insets />
-               </BorderPane.margin>
-               <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets top="85.0" />
                </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" spacing="20.0">
+               <children>
+                  <Button onAction="#goToValidator" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #f77014; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand; -fx-font-size: 14px;" text="Validator" />
+                  <Button onAction="#goToLogin" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #f77014; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand; -fx-font-size: 14px;" text="Sign" />
+               </children>
             </HBox>
-         </children></VBox>
+         </children>
+      </VBox>
    </center>
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#goToGithub" text="About" />
-            </items>
-          </Menu>
-        </menus>
+      <MenuBar style="-fx-background-color: #433d3d;" BorderPane.alignment="CENTER">
+         <menus>
+            <Menu fx:id="helpMenu" mnemonicParsing="false">
+               <graphic>
+                  <Label style="-fx-text-fill: white;" text="Help" />
+               </graphic>
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToGithub" text="About" />
+               </items>
+            </Menu>
+         </menus>
       </MenuBar>
    </top>
 </BorderPane>

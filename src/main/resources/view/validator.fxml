@@ -5,126 +5,77 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Validator">
+<BorderPane style="-fx-background-color: #221d21;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Validator">
     <center>
-        <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox prefHeight="25.0" prefWidth="200.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#goToMain" text="Return to menu" />
-               </children>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets left="5.0" />
-               </padding>
-            </HBox>
-            <Label alignment="CENTER" prefWidth="500.0" text="Select the file to verify">
-               <VBox.margin>
-                  <Insets bottom="15.0" top="45.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="Segoe UI" size="40.0" />
-               </font>
-            </Label>
-            <HBox fx:id="hBox" alignment="CENTER" minHeight="30.0" prefHeight="30.0" prefWidth="500.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#importFile" prefHeight="30.0" prefWidth="86.0" text="Import here">
-                     <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin></Button>
-                  <Button fx:id="buttonClear" mnemonicParsing="false" onAction="#clear" prefHeight="30.0" prefWidth="73.0" text="Clear">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin></HBox>
-            <Label fx:id="labelStatus" text="Status: no file selected">
-             <font>
-                 <Font name="Tahoma" size="15.0" />
-             </font>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-             </Label>
-               <Label fx:id="labelNumber" text="Number of signatures:" visible="false">
-                   <font>
-                       <Font name="Tahoma" size="15.0" />
-                   </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-               </Label>
-            <HBox prefHeight="342.0" prefWidth="500.0">
-               <children>
-                  <AnchorPane prefHeight="282.0" prefWidth="220.0">
-                     <children>
-                        <ScrollPane prefHeight="282.0" prefWidth="220.0">
-                           <content>
-                              <ListView fx:id="listView" prefHeight="280.0" prefWidth="218.0" />
-                           </content>
+        <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: #221d21;" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="TOP_LEFT">
+                    <children>
+                        <Button onAction="#goToMain" style="-fx-background-color: transparent; -fx-text-fill: #b7aea5; -fx-font-size: 13px; -fx-underline: true; -fx-cursor: hand;" text="‹ Voltar ao Menu" />
+                    </children>
+                    <padding>
+                        <Insets left="15.0" top="15.0" />
+                    </padding>
+                </HBox>
+                <Label alignment="CENTER" style="-fx-text-fill: #f77014;" text="Select the file to verify" textAlignment="CENTER" wrapText="true">
+                    <font>
+                        <Font name="Segoe UI" size="40.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="10.0" right="10.0" top="20.0" />
+                    </VBox.margin>
+                </Label>
+                <HBox fx:id="hBox" alignment="CENTER" spacing="15.0">
+                    <children>
+                        <Button onAction="#importFile" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #433d3d; -fx-text-fill: #b7aea5; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand;" text="Import File" />
+                        <Button fx:id="buttonClear" onAction="#clear" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #433d3d; -fx-text-fill: #b7aea5; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand;" text="Clear" />
+                    </children>
+                </HBox>
+                <Label fx:id="labelStatus" style="-fx-text-fill: #b7aea5;" text="Status: no file selected">
+                    <font>
+                        <Font name="Tahoma" size="15.0" />
+                    </font>
+                </Label>
+                <Label fx:id="labelNumber" style="-fx-text-fill: #b7aea5;" text="Number of signatures:" visible="false">
+                    <font>
+                        <Font name="Tahoma" size="15.0" />
+                    </font>
+                </Label>
+                <HBox alignment="CENTER" spacing="5.0">
+                    <children>
+                        <ListView fx:id="listView" prefHeight="280.0" prefWidth="198.0" style="-fx-background-color: #433d3d; -fx-control-inner-background: #433d3d; -fx-selection-bar: #f77014; -fx-selection-bar-non-focused: #e33c08; -fx-text-fill: #b7aea5; -fx-cell-size: 26px; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;" />
+                        <ScrollPane hbarPolicy="NEVER" style="-fx-background: #433d3d; -fx-background-color: #433d3d;" vbarPolicy="NEVER">
+                            <content>
+                                <VBox alignment="CENTER" prefHeight="280.0" prefWidth="230.0" spacing="15.0" style="-fx-background-color: #433d3d;">
+                                    <children>
+                                        <Label fx:id="labelName" style="-fx-text-fill: #b7aea5;">
+                                            <font>
+                                                <Font name="Tahoma" size="15.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="labelCpf" style="-fx-text-fill: #b7aea5;">
+                                            <font>
+                                                <Font name="Tahoma" size="15.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="labelDate" style="-fx-text-fill: #b7aea5;">
+                                            <font>
+                                                <Font name="Tahoma" size="15.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                    <padding>
+                                        <Insets left="10.0" right="10.0" />
+                                    </padding>
+                                </VBox>
+                            </content>
                         </ScrollPane>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane prefHeight="312.0" prefWidth="250.0">
-                     <children>
-                        <ScrollPane prefHeight="282.0" prefWidth="250.0">
-                           <content>
-                               <VBox layoutX="2.0" layoutY="2.0" prefHeight="280.0" prefWidth="248.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
-                                   <children>
-                                       <Label fx:id="labelName">
-                                           <font>
-                                               <Font name="Tahoma" size="15.0" />
-                                           </font>
-                                       <VBox.margin>
-                                          <Insets bottom="15.0" top="95.0" />
-                                       </VBox.margin>
-                                       </Label>
-                                       <Label fx:id="labelCpf">
-                                           <font>
-                                               <Font name="Tahoma" size="15.0" />
-                                           </font>
-                                       <VBox.margin>
-                                          <Insets bottom="15.0" />
-                                       </VBox.margin>
-                                       </Label>
-                                       <Label fx:id="labelDate">
-                                           <font>
-                                               <Font name="Tahoma" size="15.0" />
-                                           </font>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                       </Label>
-                                   </children>
-                                 <padding>
-                                    <Insets left="10.0" />
-                                 </padding>
-                               </VBox>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="30.0" left="30.0" top="5.0" />
-               </VBox.margin>
-            </HBox>
-         </children></VBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="15.0" right="15.0" top="5.0" />
+                    </VBox.margin>
+                </HBox>
+            </children>
+        </VBox>
     </center>
-    <top>
-        <MenuBar BorderPane.alignment="CENTER">
-            <menus>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#goToGithub" text="About" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-    </top>
 </BorderPane>

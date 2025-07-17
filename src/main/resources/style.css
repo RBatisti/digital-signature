@@ -1,0 +1,10 @@
+.context-menu {
+    -fx-background-color: #433d3d;
+}
+
+.menu-bar .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+
