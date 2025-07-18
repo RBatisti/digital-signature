@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane style="-fx-background-color: #221d21;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Main">
+<BorderPane style="-fx-background-color: #221d21;" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Main">
    <center>
       <VBox alignment="TOP_CENTER" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
@@ -42,7 +42,7 @@
                   <Label style="-fx-text-fill: white;" text="Help" />
                </graphic>
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#goToGithub" text="About" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToGithub" text="About"/>
                </items>
             </Menu>
          </menus>
