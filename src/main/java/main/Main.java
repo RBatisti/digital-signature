@@ -2,48 +2,52 @@ package main;
 
 import dao.DB;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Main extends Application {
     public static Stage stage;
 
-    private static Scene mainScene;
-    private static Scene createUserScene;
-    private static Scene validator;
-    private static Scene login;
-    private static Scene sign;
+
+    private static StackPane root;
+    private static Scene scene;
+
+    private static final Map<String, Parent> screens = new HashMap<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         stage = primaryStage;
 
-        // Load screens
-        mainScene = loadScene("/view/main.fxml");
-        login = loadScene("/view/login.fxml");
-        createUserScene = loadScene("/view/createUser.fxml");
-        validator = loadScene("/view/validator.fxml");
-        sign = loadScene("/view/sign.fxml");
+        // Main controller
+        root = new StackPane();
+        scene = new Scene(root, 500, 600);
 
-        primaryStage.setTitle("Digital Signature");
+        // Load screens
+        screens.put("main", loadView("/view/main.fxml"));
+        screens.put("login", loadView("/view/login.fxml"));
+        screens.put("createUser", loadView("/view/createUser.fxml"));
+        screens.put("validator", loadView("/view/validator.fxml"));
+        screens.put("sign", loadView("/view/sign.fxml"));
 
         Image image = new Image(Objects.requireNonNull(getClass().getResource("/images/icon.png")).toExternalForm());
         primaryStage.getIcons().add(image);
 
+        stage.setTitle("Digital Signature");
+        stage.setScene(scene);
+        stage.setMinWidth(500);
+        stage.setMinHeight(600);
+        stage.show();
+
         changeScreen("main");
-
-        // Fix the screen size
-        primaryStage.setMinWidth(500);
-        primaryStage.setMinHeight(600);
-        primaryStage.setMaxWidth(500);
-        primaryStage.setMaxHeight(600);
-
-        primaryStage.show();
 
         // Close connection at the end of execution
         Runtime.getRuntime().addShutdownHook(new Thread(DB::closeConnection));
@@ -53,32 +57,19 @@ public class Main extends Application {
         launch(args);
     }
 
-    private Scene loadScene(String path) throws Exception {
-        Parent fxml = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path)));
-        return new Scene(fxml, 500, 600);
+    private Parent loadView(String path) throws Exception {
+        return FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path)));
     }
 
-    public static void changeScreen(String screen) {
-        switch (screen) {
-            case "main":
-                stage.setScene(mainScene);
-                break;
-
-            case "login":
-                stage.setScene(login);
-                break;
-
-            case "createUser":
-                stage.setScene(createUserScene);
-                break;
-
-            case "validator":
-                stage.setScene(validator);
-                break;
-
-            case "sign":
-                stage.setScene(sign);
-                break;
+    public static void changeScreen(String screenName) {
+        Parent screen = screens.get(screenName);
+        if (screen == null) {
+            System.err.println("Screen not found: " + screenName);
+            return;
         }
+
+        Platform.runLater(() -> {
+            root.getChildren().setAll(screen);
+        });
     }
 }
