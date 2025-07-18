@@ -18,7 +18,8 @@ import java.util.List;
 
 import static dao.UserDAO.getName;
 import static dao.UserDAO.getPublicKeys;
-import static main.Main.changeScreen;
+import static screencontroller.ScreenController.changeScreen;
+import static screencontroller.ScreenController.getStage;
 import static service.SignatureService.generateFileHash;
 import static service.SignatureService.verifySignature;
 import static utils.FileUtils.*;
@@ -61,7 +62,7 @@ public class Validator implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open your document");
 
-        file = fileChooser.showOpenDialog(main.Main.stage);
+        file = fileChooser.showOpenDialog(getStage());
 
         List<String> signatures = getSignatures(file);
 

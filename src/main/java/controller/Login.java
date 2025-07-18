@@ -9,7 +9,7 @@ import session.SessionManager;
 import java.awt.*;
 import java.io.IOException;
 
-import static main.Main.changeScreen;
+import static screencontroller.ScreenController.changeScreen;
 import static service.AuthService.checkLogin;
 import static service.AuthService.loadUser;
 import static utils.Alerts.*;

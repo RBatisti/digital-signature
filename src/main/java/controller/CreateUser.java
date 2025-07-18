@@ -9,7 +9,7 @@ import java.awt.*;
 import java.io.IOException;
 
 import static dao.UserDAO.existCpf;
-import static main.Main.changeScreen;
+import static screencontroller.ScreenController.changeScreen;
 import static service.AuthService.createUser;
 import static utils.Alerts.showMessage;
 

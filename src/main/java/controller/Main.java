@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import java.awt.*;
 import java.io.IOException;
 
-import static main.Main.changeScreen;
+import static screencontroller.ScreenController.changeScreen;
 
 public class Main {
     @FXML

@@ -12,7 +12,8 @@ import java.nio.file.Files;
 import java.security.PublicKey;
 import java.util.ArrayList;
 
-import static main.Main.changeScreen;
+import static screencontroller.ScreenController.changeScreen;
+import static screencontroller.ScreenController.getStage;
 import static service.SignatureService.*;
 import static utils.FileUtils.*;
 
@@ -30,7 +31,7 @@ public class Sign {
         fileChooser.setTitle("Open your file");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF file", "*.pdf"));
 
-        selectedFile = fileChooser.showOpenDialog(main.Main.stage);
+        selectedFile = fileChooser.showOpenDialog(getStage());
 
         // Load all signatures
         if (selectedFile != null) {
@@ -111,7 +112,7 @@ public class Sign {
 
         // Save the file
         try {
-            File file = fileChooser.showSaveDialog(main.Main.stage);
+            File file = fileChooser.showSaveDialog(getStage());
             if (file != null) {
                 byte[] fileContent = Files.readAllBytes(selectedFile.toPath());
                 Files.write(file.toPath(), fileContent);
